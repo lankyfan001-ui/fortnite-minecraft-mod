@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "fortnite_overhaul:item/peely_chestplate"
+  }
+}

@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="fortnite_overhaul"
+version="0.1.0"
+displayName="Fortnite Overhaul"
+displayURL="https://github.com/lankyfan001-ui/fortnite-minecraft-mod"
+authors="lankyfan001-ui"
+description='''
+A Forge 1.20.1 mod starter that introduces Fortnite-inspired outfits,
+cosmetics, and POI concepts into Minecraft.
+'''
