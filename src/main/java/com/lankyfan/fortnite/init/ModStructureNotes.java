@@ -1,0 +1,31 @@
+package com.lankyfan.fortnite;
+
+import com.lankyfan.fortnite.init.ModCreativeTabs;
+import com.lankyfan.fortnite.init.ModItems;
+import com.mojang.logging.LogUtils;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.slf4j.Logger;
+
+@Mod(FortniteOverhaul.MOD_ID)
+public class FortniteOverhaul {
+    public static final String MOD_ID = "fortnite_overhaul";
+    public static final Logger LOGGER = LogUtils.getLogger();
+
+    public FortniteOverhaul() {
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.register(modBus);
+        ModCreativeTabs.register(modBus);
+        modBus.addListener(this::commonSetup);
+
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        LOGGER.info("Fortnite Overhaul is loading Fortnite-inspired outfits, cosmetics, and POI foundations.");
+    }
+}

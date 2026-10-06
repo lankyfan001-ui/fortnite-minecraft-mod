@@ -1,0 +1,84 @@
+package com.lankyfan.fortnite.item;
+
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+
+public enum FortniteArmorMaterials implements ArmorMaterial {
+    JONESY("jonesy", 33, new int[]{2, 5, 6, 2}, 18, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F),
+    PEELY("peely", 35, new int[]{2, 6, 7, 2}, 18, SoundEvents.ARMOR_EQUIP_LEATHER, 0.0F, 0.0F),
+    DRIFT("drift", 38, new int[]{3, 7, 8, 3}, 20, SoundEvents.ARMOR_EQUIP_CHAIN, 0.0F, 0.0F),
+    RAVEN("raven", 40, new int[]{3, 7, 8, 3}, 22, SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F),
+    OMEGA("omega", 42, new int[]{4, 8, 9, 4}, 25, SoundEvents.ARMOR_EQUIP_DIAMOND, 0.0F, 0.0F);
+
+    private static final int[] DURABILITY_PER_SLOT = new int[]{13, 15, 16, 11};
+
+    private final String name;
+    private final int durabilityMultiplier;
+    private final int[] slotProtections;
+    private final int enchantmentValue;
+    private final SoundEvent sound;
+    private final float toughness;
+    private final float knockbackResistance;
+
+    FortniteArmorMaterials(
+            String name,
+            int durabilityMultiplier,
+            int[] slotProtections,
+            int enchantmentValue,
+            SoundEvent sound,
+            float toughness,
+            float knockbackResistance
+    ) {
+        this.name = name;
+        this.durabilityMultiplier = durabilityMultiplier;
+        this.slotProtections = slotProtections;
+        this.enchantmentValue = enchantmentValue;
+        this.sound = sound;
+        this.toughness = toughness;
+        this.knockbackResistance = knockbackResistance;
+    }
+
+    @Override
+    public int getDurabilityForType(ArmorItem.Type type) {
+        return DURABILITY_PER_SLOT[type.getSlot().getIndex()] * this.durabilityMultiplier;
+    }
+
+    @Override
+    public int getDefenseForType(ArmorItem.Type type) {
+        return this.slotProtections[type.getSlot().getIndex()];
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return this.enchantmentValue;
+    }
+
+    @Override
+    public SoundEvent getEquipSound() {
+        return this.sound;
+    }
+
+    @Override
+    public Ingredient getRepairIngredient() {
+        return Ingredient.of(Items.LEATHER);
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public float getToughness() {
+        return this.toughness;
+    }
+
+    @Override
+    public float getKnockbackResistance() {
+        return this.knockbackResistance;
+    }
+}
