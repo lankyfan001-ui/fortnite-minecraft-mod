@@ -1,17 +1,35 @@
-{
-  "item.minecraft.iron_sword": "Iron Sword",
-  "item.fortnite_overhaul.jonesy_helmet": "Jonesy Helmet",
-  "item.fortnite_overhaul.jonesy_chestplate": "Jonesy Chestplate",
-  "item.fortnite_overhaul.jonesy_leggings": "Jonesy Leggings",
-  "item.fortnite_overhaul.jonesy_boots": "Jonesy Boots",
-  "item.fortnite_overhaul.peely_helmet": "Peely Helmet",
-  "item.fortnite_overhaul.peely_chestplate": "Peely Chestplate",
-  "item.fortnite_overhaul.peely_leggings": "Peely Leggings",
-  "item.fortnite_overhaul.peely_boots": "Peely Boots",
-  "item.fortnite_overhaul.drift_helmet": "Drift Helmet",
-  "item.fortnite_overhaul.drift_chestplate": "Drift Chestplate",
-  "item.fortnite_overhaul.drift_leggings": "Drift Leggings",
-  "item.fortnite_overhaul.drift_boots": "Drift Boots",
-  "item.fortnite_overhaul.gold_shield_backbling": "Gold Shield Back Bling",
-  "itemGroup.fortnite_overhaul.main": "Fortnite Overhaul"
+package com.lankyfan.fortnite;
+
+import com.lankyfan.fortnite.init.ModBlocks;
+import com.lankyfan.fortnite.init.ModCreativeTabs;
+import com.lankyfan.fortnite.init.ModItems;
+import com.lankyfan.fortnite.worldgen.ModWorldGen;
+import com.mojang.logging.LogUtils;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.slf4j.Logger;
+
+@Mod(FortniteOverhaul.MOD_ID)
+public class FortniteOverhaul {
+    public static final String MOD_ID = "fortnite_overhaul";
+    public static final Logger LOGGER = LogUtils.getLogger();
+
+    public FortniteOverhaul() {
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.register(modBus);
+        ModBlocks.register(modBus);
+        ModCreativeTabs.register(modBus);
+        ModWorldGen.register(modBus);
+        modBus.addListener(this::commonSetup);
+
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        LOGGER.info("Fortnite Overhaul is loading Fortnite-inspired outfits, cosmetics, blocks, and POI foundations.");
+    }
 }

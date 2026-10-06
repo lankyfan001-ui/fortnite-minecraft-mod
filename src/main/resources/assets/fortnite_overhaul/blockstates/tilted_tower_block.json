@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "fortnite_overhaul:block/battle_pass_sign_block"
+  }
+}

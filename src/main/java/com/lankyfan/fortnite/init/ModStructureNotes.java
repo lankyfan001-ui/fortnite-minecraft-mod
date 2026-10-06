@@ -1,31 +1,21 @@
-package com.lankyfan.fortnite;
+package com.lankyfan.fortnite.worldgen;
 
-import com.lankyfan.fortnite.init.ModCreativeTabs;
-import com.lankyfan.fortnite.init.ModItems;
-import com.mojang.logging.LogUtils;
-import net.minecraftforge.common.MinecraftForge;
+import com.lankyfan.fortnite.FortniteOverhaul;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.slf4j.Logger;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
-@Mod(FortniteOverhaul.MOD_ID)
-public class FortniteOverhaul {
-    public static final String MOD_ID = "fortnite_overhaul";
-    public static final Logger LOGGER = LogUtils.getLogger();
+public class ModWorldGen {
+    public static final DeferredRegister<Feature<?>> FEATURES =
+            DeferredRegister.create(Registries.FEATURE, FortniteOverhaul.MOD_ID);
 
-    public FortniteOverhaul() {
-        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> FORTNITE_POI =
+            FEATURES.register("fortnite_poi", FortnitePOIFeature::new);
 
-        ModItems.register(modBus);
-        ModCreativeTabs.register(modBus);
-        modBus.addListener(this::commonSetup);
-
-        MinecraftForge.EVENT_BUS.register(this);
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        LOGGER.info("Fortnite Overhaul is loading Fortnite-inspired outfits, cosmetics, and POI foundations.");
+    public static void register(IEventBus bus) {
+        FEATURES.register(bus);
     }
 }
